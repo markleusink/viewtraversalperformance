@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:div
+		id="content"
+		styleClass="container-fluid">
+
+		<div>
+			Fakenames database path:
+			<xp:inputText
+				id="inputText1"
+				value="#{sessionScope.dbPath}"
+				defaultValue="bs4xp/fakenames.nsf">
+			</xp:inputText>
+		</div>
+
+		<div
+			class="row">
+
+			<xp:panel
+				styleClass="col-sm-4">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.Legacy();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+
+			<xp:panel
+				styleClass="col-sm-4">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.ODA();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+
+			<xp:panel
+				styleClass="col-sm-4">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.JNA();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+
+
+
+		</div>
+
+	</xp:div>
+</xp:view>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view
+	xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:text
+		escape="true"
+		tagName="h4"
+		value="#{compositeData.ctrl.label}"
+		id="computedField1">
+	</xp:text>
+
+	<xp:button
+		value="Start"
+		id="button1"
+		onclick="$(this).button('loading');">
+		<xp:this.attrs>
+			<xp:attr
+				name="data-loading-text"
+				value="Wait for it..."></xp:attr>
+		</xp:this.attrs>
+		<xp:eventHandler
+			event="onclick"
+			submit="true"
+			refreshMode="partial"
+			refreshId="content">
+			<xp:this.action><![CDATA[#{javascript:compositeData.ctrl.go()}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+
+	<xp:repeat
+		id="repeat1"
+		rows="50"
+		var="res"
+		value="#{compositeData.ctrl.results}">
+		<xp:text
+			value="#{res}" />
+		<br />
+	</xp:repeat>
+
+</xp:view>

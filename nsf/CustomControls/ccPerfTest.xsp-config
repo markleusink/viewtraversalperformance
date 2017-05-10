@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccPerfTest</component-type>
+    <composite-name>ccPerfTest</composite-name>
+    <composite-file>/ccPerfTest.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>ctrl</property-name>
+      <property-class>com.ibm.xsp.extlib.model.ObjectDataSource</property-class>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+  </composite-component>
+</faces-config>
