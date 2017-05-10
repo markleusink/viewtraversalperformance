@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view xmlns="http://www.lotus.com/dxl" name="vwResultsByType" showinmenu="false" publicaccess="false" default="true" unreadmarks="none" onopengoto="lastopened" onrefresh="displayindicator" headers="beveled" opencollapsed="false" showresponsehierarchy="true" showmargin="true" shrinkrows="false" extendlastcolumn="false" showhierarchies="false" unreadcolor="black" rowlinecount="1" headerlinecount="1" rowspacing="1" bgcolor="white" totalscolor="black" headerbgcolor="white" boldunreadrows="false" evaluateactions="false" allownewdocuments="false" allowcustomizations="false" hidemarginborder="false" marginwidth="0px" marginbgcolor="white" uniquekeys="false">
+  <code event="selection">
+    <formula>SELECT form="fResult"</formula>
+  </code>
+  <column sort="ascending" hidedetailrows="false" itemname="type" width="10" resizable="true" separatemultiplevalues="true" sortnoaccent="true" sortnocase="true" showaslinks="false" categorized="true">
+    <columnheader title="type">
+      <font size="9pt" style="bold"/>
+    </columnheader>
+  </column>
+  <column sort="descending" hidedetailrows="false" itemname="$2" width="10" resizable="true" separatemultiplevalues="false" sortnoaccent="false" sortnocase="true" showaslinks="false">
+    <columnheader title="created">
+      <font size="9pt" style="bold"/>
+    </columnheader>
+    <code event="value">
+      <formula>@Created</formula>
+    </code>
+  </column>
+  <column hidedetailrows="false" itemname="elapsedTime" width="10" resizable="true" separatemultiplevalues="false" sortnoaccent="false" sortnocase="true" showaslinks="false">
+    <columnheader title="elapsedTime">
+      <font size="9pt" style="bold"/>
+    </columnheader>
+  </column>
+</view>

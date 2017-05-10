@@ -1,5 +1,6 @@
 package eu.focos.performance;
 
+import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -13,15 +14,15 @@ import com.mindoo.domino.jna.NotesCollection.EntriesAsListCallback;
 import com.mindoo.domino.jna.constants.Navigate;
 import com.mindoo.domino.jna.constants.ReadMask;
 
-public class JNA extends Base {
+public class JNA implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	public void go() {
+	public void go(String label) {
 
 		try {
 
-			Timer timer = new Timer();
+			Timer timer = new Timer(label);
 			timer.start();
 			
 			Session session = ExtLibUtil.getCurrentSession();
@@ -44,6 +45,7 @@ public class JNA extends Base {
 			for (NotesViewEntryData currEntry : allEntries) {
 				i++;
 				
+				
 				String userName = (String) currEntry.get("$17");
 				
 				/*if (i % 5000 ==0) {
@@ -52,9 +54,7 @@ public class JNA extends Base {
 
 			}
 
-			timer.stop();
-
-			this.addResult(timer.getElapsedTimeMs() + " ms for " + i + " entries"); 
+			timer.stopAndSave();
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,7 @@
 package eu.focos.performance;
 
+import java.io.Serializable;
+
 import org.openntf.domino.Database;
 import org.openntf.domino.Session;
 import org.openntf.domino.View;
@@ -9,14 +11,15 @@ import org.openntf.domino.utils.XSPUtil;
 
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
-public class ODA extends Base {
+public class ODAColIndex implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public void go() {
-		
+	public void go(String label) {
+
 		try {
-			Timer timer = new Timer();
+
+			Timer timer = new Timer(label);
 			timer.start();
 			
 			Session session = XSPUtil.getCurrentSession();
@@ -33,18 +36,15 @@ public class ODA extends Base {
 			for(ViewEntry ve : nav) {
 				i++;
 				
-				//@SuppressWarnings("unused")
-				String userName = (String) ve.getColumnValue("$17", String.class);
+				String userName = (String) ve.getColumnValues().get(1);
 				
 				/*if (i % 5000 ==0) {
-					System.out.println(i + userName);
+					System.out.println(i + " " + userName);
 				}*/
 
 			}
 			
-			timer.stop();
-			
-			this.addResult(timer.getElapsedTimeMs() + " ms for " + i + " entries"); 
+			timer.stopAndSave();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

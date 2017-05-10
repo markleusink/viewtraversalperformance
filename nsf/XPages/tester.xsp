@@ -8,7 +8,7 @@
 		id="content"
 		styleClass="container-fluid">
 
-		<div>
+		<div class="well well-sm">
 			Fakenames database path:
 			<xp:inputText
 				id="inputText1"
@@ -21,7 +21,7 @@
 			class="row">
 
 			<xp:panel
-				styleClass="col-sm-4">
+				styleClass="col-sm-2">
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
@@ -29,25 +29,41 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
+					label="Legacy"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
 
 			<xp:panel
-				styleClass="col-sm-4">
+				styleClass="col-sm-2">
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
-						createObject="#{javascript:return new eu.focos.performance.ODA();}">
+						createObject="#{javascript:return new eu.focos.performance.ODAColName();}">
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
+					label="ODA (col value by name)"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+			
+			<xp:panel
+				styleClass="col-sm-2">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.ODAColIndex();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="ODA (col value by index)"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
 
 			<xp:panel
-				styleClass="col-sm-4">
+				styleClass="col-sm-2">
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
@@ -55,6 +71,7 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
+					label="JNA"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>

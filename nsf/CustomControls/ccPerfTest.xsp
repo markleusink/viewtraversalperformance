@@ -2,13 +2,22 @@
 <xp:view
 	xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
-
+	
+	<xp:this.data>
+		<xp:dominoView
+			var="view1"
+			viewName="vwResultsByType"
+			categoryFilter="#{javascript:compositeData.label}">
+		</xp:dominoView>
+	</xp:this.data>
+	<div style="height: 50px">
 	<xp:text
 		escape="true"
-		tagName="h4"
-		value="#{compositeData.ctrl.label}"
+		tagName="h5"
+		value="#{compositeData.label}"
 		id="computedField1">
 	</xp:text>
+	</div>
 
 	<xp:button
 		value="Start"
@@ -17,25 +26,46 @@
 		<xp:this.attrs>
 			<xp:attr
 				name="data-loading-text"
-				value="Wait for it..."></xp:attr>
+				value="Wait for it...">
+			</xp:attr>
 		</xp:this.attrs>
 		<xp:eventHandler
 			event="onclick"
 			submit="true"
 			refreshMode="partial"
 			refreshId="content">
-			<xp:this.action><![CDATA[#{javascript:compositeData.ctrl.go()}]]></xp:this.action>
+			<xp:this.action><![CDATA[#{javascript:compositeData.ctrl.go(compositeData.label)}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
 
 	<xp:repeat
 		id="repeat1"
-		rows="50"
+		rows="30"
 		var="res"
-		value="#{compositeData.ctrl.results}">
-		<xp:text
-			value="#{res}" />
+		value="#{view1}">
+		<xp:text value="#{res.elapsedTime}">
+			<xp:this.converter>
+				<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+			</xp:this.converter>
+		</xp:text>
+		&#160;ms
 		<br />
 	</xp:repeat>
+	
+	<hr />
+
+	Average:&#160;
+	<xp:text
+		escape="true"
+		id="computedField2">
+		<xp:this.value><![CDATA[#{javascript:var n = @DbLookup("", "vwResultsByType", 
+compositeData.label, 3);
+
+return @Sum(n) / n.length;
+}]]></xp:this.value>
+		<xp:this.converter>
+			<xp:convertNumber pattern="#,##0"></xp:convertNumber>
+		</xp:this.converter>
+	</xp:text>&#160;ms
 
 </xp:view>
