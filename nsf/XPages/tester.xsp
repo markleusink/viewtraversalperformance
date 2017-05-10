@@ -2,19 +2,30 @@
 <xp:view
 	xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex"
-	xmlns:xc="http://www.ibm.com/xsp/custom">
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="Performance">
 
 	<xp:div
 		id="content"
 		styleClass="container-fluid">
 
-		<div class="well well-sm">
-			Fakenames database path:
-			<xp:inputText
-				id="inputText1"
-				value="#{sessionScope.dbPath}"
-				defaultValue="bs4xp/fakenames.nsf">
-			</xp:inputText>
+		<div
+			class="well well-sm form-horizontal">
+			<div
+				class="form-group">
+				<label
+					class="control-label col-sm-4">
+					Fakenames database path:
+			</label>
+				<div
+					class="col-sm-8">
+					<xp:inputText
+						id="inputText1"
+						value="#{sessionScope.dbPath}"
+						defaultValue="bs4xp/fakenames.nsf">
+					</xp:inputText>
+				</div>
+			</div>
 		</div>
 
 		<div
@@ -47,7 +58,7 @@
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
-			
+
 			<xp:panel
 				styleClass="col-sm-2">
 				<xp:this.data>
@@ -71,7 +82,21 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
-					label="JNA"
+					label="JNA ('summary')"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+			
+				<xp:panel
+				styleClass="col-sm-2">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.JNASummaryValues();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="JNA ('summaryvalues')"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>

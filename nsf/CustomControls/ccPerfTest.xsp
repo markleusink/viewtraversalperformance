@@ -61,6 +61,8 @@
 		<xp:this.value><![CDATA[#{javascript:var n = @DbLookup("", "vwResultsByType", 
 compositeData.label, 3);
 
+if (n==null || n.length==0) { return 0; }
+
 return @Sum(n) / n.length;
 }]]></xp:this.value>
 		<xp:this.converter>
