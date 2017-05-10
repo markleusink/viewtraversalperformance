@@ -45,7 +45,6 @@ public class JNA implements Serializable{
 			for (NotesViewEntryData currEntry : allEntries) {
 				i++;
 				
-				
 				String userName = (String) currEntry.get("$17");
 				
 				/*if (i % 5000 ==0) {

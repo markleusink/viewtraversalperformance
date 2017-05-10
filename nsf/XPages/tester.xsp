@@ -50,6 +50,20 @@
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.LegacyNoteCollection();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="Legacy (using NoteCollection)"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+
+			<xp:panel
+				styleClass="col-sm-2">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
 						createObject="#{javascript:return new eu.focos.performance.ODAColName();}">
 					</xe:objectData>
 				</xp:this.data>
@@ -86,8 +100,8 @@
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
-			
-				<xp:panel
+
+			<xp:panel
 				styleClass="col-sm-2">
 				<xp:this.data>
 					<xe:objectData

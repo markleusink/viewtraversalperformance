@@ -45,7 +45,7 @@ public class Legacy implements Serializable {
 					System.out.println(i + userName);
 				}*/
 				
-				ViewEntry tmp = nav.getNext(ve);
+				ViewEntry tmp = nav.getNext();
 				ve.recycle();
 				ve = tmp;
 			}
