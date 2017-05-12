@@ -78,6 +78,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="Legacy"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/Legacy.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -92,6 +93,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="Legacy (using NoteCollection)"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/LegacyNoteCollection.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -106,6 +108,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="ODA (col value by name)"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/ODAColName.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -120,6 +123,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="ODA (col value by index)"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/ODAColIndex.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -134,6 +138,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="JNA ('summary')"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNA.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -148,6 +153,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="JNA ('summaryvalues')"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNASummaryValues.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
@@ -166,6 +172,7 @@
 				</xp:this.data>
 				<xc:ccPerfTest
 					label="JNA (not a fair test: retrieves only the NoteIds of the entries)"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNANoteIdsOnly.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
