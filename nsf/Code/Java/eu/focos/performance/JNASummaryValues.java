@@ -3,6 +3,7 @@ package eu.focos.performance;
 import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import lotus.domino.Session;
 
@@ -13,6 +14,7 @@ import com.mindoo.domino.jna.NotesViewEntryData;
 import com.mindoo.domino.jna.NotesCollection.EntriesAsListCallback;
 import com.mindoo.domino.jna.constants.Navigate;
 import com.mindoo.domino.jna.constants.ReadMask;
+import com.mindoo.domino.jna.gc.NotesGC;
 
 public class JNASummaryValues implements Serializable{
 	
@@ -25,33 +27,41 @@ public class JNASummaryValues implements Serializable{
 			Timer timer = new Timer(label);
 			timer.start();
 			
-			Session session = ExtLibUtil.getCurrentSession();
-			NotesDatabase dbData = new NotesDatabase(session, "", (String) ExtLibUtil.getSessionScope().get("dbPath"));
-		
-			NotesCollection colFromDbData = dbData.openCollectionByName("People");
+			NotesGC.runWithAutoGC(new Callable<Object>() {
 
-			String startPos = "0";
-			int entriesToSkip = 1;
-
-			EnumSet<Navigate> returnNavigator = EnumSet.of(Navigate.NEXT);
-			EnumSet<ReadMask> returnData = EnumSet.of(ReadMask.NOTEID, ReadMask.SUMMARYVALUES);
-
-			List<NotesViewEntryData> allEntries = colFromDbData.getAllEntries(startPos, entriesToSkip, 
-					returnNavigator, Integer.MAX_VALUE,
-					returnData, new EntriesAsListCallback(Integer.MAX_VALUE));
+				public Object call() throws Exception {
 			
-			int i = 0;
+					Session session = ExtLibUtil.getCurrentSession();
+					NotesDatabase dbData = new NotesDatabase(session, "", Utils.getTestDbPath());
+				
+					NotesCollection colFromDbData = dbData.openCollectionByName("People");
 		
-			for (NotesViewEntryData currEntry : allEntries) {
-				i++;
+					String startPos = "0";
+					int entriesToSkip = 1;
+		
+					EnumSet<Navigate> returnNavigator = EnumSet.of(Navigate.NEXT);
+					EnumSet<ReadMask> returnData = EnumSet.of(ReadMask.NOTEID, ReadMask.SUMMARYVALUES);
+		
+					List<NotesViewEntryData> allEntries = colFromDbData.getAllEntries(startPos, entriesToSkip, 
+							returnNavigator, Integer.MAX_VALUE,
+							returnData, new EntriesAsListCallback(Integer.MAX_VALUE));
+					
+					int i = 0;
 				
-				String userName = (String) currEntry.get("$17");
-				
-			/*	if (i % 5000 ==0) {
-					System.out.println(i + userName);
+					for (NotesViewEntryData currEntry : allEntries) {
+						i++;
+						
+						String userName = (String) currEntry.get("$17");
+						
+						/*if (i % 5000 ==0) {
+							System.out.println(i + userName);
+						}*/
+		
+					}
+					
+					return null;
 				}
-*/
-			}
+			});
 
 			timer.stopAndSave();
 

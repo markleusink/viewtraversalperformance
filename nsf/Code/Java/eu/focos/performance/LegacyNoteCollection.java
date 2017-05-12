@@ -23,7 +23,7 @@ public class LegacyNoteCollection implements Serializable {
 			timer.start();
 
 			Session session = ExtLibUtil.getCurrentSession();
-			Database dbData = session.getDatabase("", (String) ExtLibUtil.getSessionScope().get("dbPath"));
+			Database dbData = session.getDatabase("", Utils.getTestDbPath());
 
 			// construct a NoteCollection on the fly using the same selection formula as in the view (People)
 			NoteCollection nc = dbData.createNoteCollection(false);
@@ -31,6 +31,7 @@ public class LegacyNoteCollection implements Serializable {
 			nc.setSelectionFormula("Form=\"Person\"");
 			nc.buildCollection();
 			
+			//loop through the noteIds from the notecollection, get every document from the database
 			String noteId = nc.getFirstNoteID();
 			while (!StringUtil.isEmpty(noteId)) {
 				Document doc = dbData.getDocumentByID(noteId);

@@ -23,7 +23,7 @@ public class Legacy implements Serializable {
 			timer.start();
 			
 			Session session = ExtLibUtil.getCurrentSession();
-			Database dbData = session.getDatabase("", (String)ExtLibUtil.getSessionScope().get("dbPath"));
+			Database dbData = session.getDatabase("", Utils.getTestDbPath());
 			
 			View view = dbData.getView("People");
 			view.setAutoUpdate(false);

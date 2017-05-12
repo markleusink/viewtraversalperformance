@@ -2,7 +2,7 @@
 <xp:view
 	xmlns:xp="http://www.ibm.com/xsp/core"
 	xmlns:xe="http://www.ibm.com/xsp/coreex">
-	
+
 	<xp:this.data>
 		<xp:dominoView
 			var="view1"
@@ -10,19 +10,20 @@
 			categoryFilter="#{javascript:compositeData.label}">
 		</xp:dominoView>
 	</xp:this.data>
-	<div style="height: 50px">
-	<xp:text
-		escape="true"
-		tagName="h5"
-		value="#{compositeData.label}"
-		id="computedField1">
-	</xp:text>
+	<div
+		style="height: 50px">
+		<xp:text
+			escape="true"
+			tagName="h5"
+			value="#{compositeData.label}"
+			id="computedField1">
+		</xp:text>
 	</div>
 
 	<xp:button
 		value="Start"
 		id="button1"
-		onclick="$(this).button('loading');">
+		onclick="$(this).button('loading'); $('button').attr('disabled', true)">
 		<xp:this.attrs>
 			<xp:attr
 				name="data-loading-text"
@@ -33,41 +34,59 @@
 			event="onclick"
 			submit="true"
 			refreshMode="partial"
-			refreshId="content">
+			refreshId="results"
+			onComplete="$('button').button('reset').attr('disabled', false);">
 			<xp:this.action><![CDATA[#{javascript:compositeData.ctrl.go(compositeData.label)}]]></xp:this.action>
 		</xp:eventHandler>
 	</xp:button>
 
-	<xp:repeat
-		id="repeat1"
-		rows="30"
-		var="res"
-		value="#{view1}">
-		<xp:text value="#{res.elapsedTime}">
-			<xp:this.converter>
-				<xp:convertNumber pattern="#,##0"></xp:convertNumber>
-			</xp:this.converter>
-		</xp:text>
-		&#160;ms
-		<br />
-	</xp:repeat>
-	
-	<hr />
+	<div
+		style="margin-top:10px"
+		class="blurry-text">
 
-	Average:&#160;
-	<xp:text
-		escape="true"
-		id="computedField2">
-		<xp:this.value><![CDATA[#{javascript:var n = @DbLookup("", "vwResultsByType", 
+		<xp:div
+			id="results">
+
+			<xp:repeat
+				id="repeat1"
+				style="min-height: 210px"
+				rows="10"
+				var="res"
+				value="#{view1}">
+				<xp:text
+					value="#{res.elapsedTime}">
+					<xp:this.converter>
+						<xp:convertNumber
+							pattern="#,##0"></xp:convertNumber>
+					</xp:this.converter>
+				</xp:text>
+				&#160;ms
+				<br />
+			</xp:repeat>
+
+			<hr />
+
+			Average:&#160;
+			<b>
+				<xp:text
+					escape="true"
+					id="computedField2">
+					<xp:this.value><![CDATA[#{javascript:var n = @DbLookup("", "vwResultsByType", 
 compositeData.label, 3);
 
 if (n==null || n.length==0) { return 0; }
 
 return @Sum(n) / n.length;
 }]]></xp:this.value>
-		<xp:this.converter>
-			<xp:convertNumber pattern="#,##0"></xp:convertNumber>
-		</xp:this.converter>
-	</xp:text>&#160;ms
+					<xp:this.converter>
+						<xp:convertNumber
+							pattern="#,##0"></xp:convertNumber>
+					</xp:this.converter>
+				</xp:text>
+				&#160;ms
+			</b>
 
+		</xp:div>
+
+	</div>
 </xp:view>

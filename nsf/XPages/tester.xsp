@@ -5,31 +5,68 @@
 	xmlns:xc="http://www.ibm.com/xsp/custom"
 	pageTitle="Performance">
 
+	<style
+		type="text/css">
+		.blurry-text {
+		color: transparent;
+		text-shadow: 0 0 10px rgba(0,0,0,0.5);
+		}
+	</style>
+
+	<nav
+		class="navbar navbar-default navbar-static-top">
+		<div
+			class="container">
+			<div
+				class="navbar-header">
+				<a
+					class="navbar-brand"
+					href="#">View traversal with Domino APIs</a>
+			</div>
+			<div
+				id="navbar"
+				class="navbar-collapse collapse">
+				<ul
+					class="nav navbar-nav">
+					<li>
+						<a
+							target="_blank"
+							href="https://github.com/markleusink/viewtraversalperformance/tree/master/nsf/Code/Java/eu/focos/performance">Code on GitHub</a>
+					</li>
+
+				</ul>
+				<ul
+					class="nav navbar-nav navbar-right">
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<xp:div
 		id="content"
 		styleClass="container-fluid">
 
-		<div
-			class="well well-sm form-horizontal">
-			<div
-				class="form-group">
-				<label
-					class="control-label col-sm-4">
-					Fakenames database path:
-			</label>
-				<div
-					class="col-sm-8">
-					<xp:inputText
-						id="inputText1"
-						value="#{sessionScope.dbPath}"
-						defaultValue="bs4xp/fakenames.nsf">
-					</xp:inputText>
-				</div>
-			</div>
-		</div>
+		<xp:button
+			value="Show me the results!"
+			themeId="Button.Primary"
+			id="button1">
+			<xp:eventHandler
+				event="onclick"
+				submit="false">
+				<xp:this.script><![CDATA[$(".blurry-text").removeClass("blurry-text");]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
 
-		<div
-			class="row">
+
+		<!--
+
+			<div class="well well-sm form-horizontal"> <div class="form-group"> <label class="control-label col-sm-4"> Fakenames database path:
+			</label> <div class="col-sm-8"> <xp:inputText id="inputText1" value="#{sessionScope.dbPath}" defaultValue="bs4xp/fakenames.nsf">
+			</xp:inputText> </div> </div> </div>
+		-->
+		<xp:div
+			styleClass="row">
 
 			<xp:panel
 				styleClass="col-sm-2">
@@ -114,10 +151,26 @@
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
+		</xp:div>
 
+		<hr />
+		<xp:div
+			styleClass="row">
+			<xp:panel
+				styleClass="col-sm-6">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.JNANoteIdsOnly();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="JNA (not a fair test: retrieves only the NoteIds of the entries)"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
 
-
-		</div>
+		</xp:div>
 
 	</xp:div>
 </xp:view>

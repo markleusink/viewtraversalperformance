@@ -9,8 +9,6 @@ import org.openntf.domino.ViewEntry;
 import org.openntf.domino.ViewNavigator;
 import org.openntf.domino.utils.XSPUtil;
 
-import com.ibm.xsp.extlib.util.ExtLibUtil;
-
 public class ODAColIndex implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +21,7 @@ public class ODAColIndex implements Serializable {
 			timer.start();
 			
 			Session session = XSPUtil.getCurrentSession();
-			Database dbData = session.getDatabase("", (String)ExtLibUtil.getSessionScope().get("dbPath"));
+			Database dbData = session.getDatabase("", Utils.getTestDbPath());
 			
 			View view = dbData.getView("People");
 			ViewNavigator nav = view.createViewNav();
