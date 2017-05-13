@@ -186,7 +186,7 @@
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
-						createObject="#{javascript:return new eu.focos.performance.JNANoteIdsOnly();}">
+						createObject="#{javascript:return new eu.focos.performance.JNANoteIdsOnlyFaster();}">
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
