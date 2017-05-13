@@ -160,10 +160,14 @@
 		</xp:div>
 
 		<hr />
+		<div
+			class="alert alert-warning">
+			Tests that only get the note ID: these cannot be compared to the tests above...
+		</div>
 		<xp:div
 			styleClass="row">
 			<xp:panel
-				styleClass="col-sm-6">
+				styleClass="col-sm-2">
 				<xp:this.data>
 					<xe:objectData
 						var="objectData1"
@@ -171,8 +175,23 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
-					label="JNA (not a fair test: retrieves only the NoteIds of the entries)"
+					label="JNA (method 1)"
 					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNANoteIdsOnly.java"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+
+			<xp:panel
+				styleClass="col-sm-2">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.JNANoteIdsOnly();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="JNA (method 2)"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNANoteIdsOnlyFaster.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>

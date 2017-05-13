@@ -1,8 +1,6 @@
 package eu.focos.performance;
 
 import java.io.Serializable;
-import java.util.EnumSet;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 import lotus.domino.Session;
@@ -10,13 +8,11 @@ import lotus.domino.Session;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.mindoo.domino.jna.NotesCollection;
 import com.mindoo.domino.jna.NotesDatabase;
-import com.mindoo.domino.jna.NotesViewEntryData;
-import com.mindoo.domino.jna.NotesCollection.EntriesAsListCallback;
+import com.mindoo.domino.jna.NotesIDTable;
 import com.mindoo.domino.jna.constants.Navigate;
-import com.mindoo.domino.jna.constants.ReadMask;
 import com.mindoo.domino.jna.gc.NotesGC;
 
-public class JNANoteIdsOnly implements Serializable{
+public class JNANoteIdsOnlyFaster implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -35,24 +31,17 @@ public class JNANoteIdsOnly implements Serializable{
 					NotesDatabase dbData = new NotesDatabase(session, "", Utils.getTestDbPath());
 				
 					NotesCollection colFromDbData = dbData.openCollectionByName("People");
-		
-					String startPos = "0";
-					int entriesToSkip = 1;
-		
-					EnumSet<Navigate> returnNavigator = EnumSet.of(Navigate.NEXT);
-					EnumSet<ReadMask> returnData = EnumSet.of(ReadMask.NOTEID);
-		
-					List<NotesViewEntryData> allEntries = colFromDbData.getAllEntries(startPos, entriesToSkip, 
-							returnNavigator, Integer.MAX_VALUE,
-							returnData, new EntriesAsListCallback(Integer.MAX_VALUE));
+							
+					NotesIDTable allIds = new NotesIDTable();
+					colFromDbData.getAllIds(Navigate.NEXT_NONCATEGORY, false, allIds);
 					
 					int i = 0;
 					
-					for (NotesViewEntryData currEntry : allEntries) {
+					int[] arrIds = allIds.toArray();
+					
+					for (int noteId : arrIds) {
 						i++;
 						
-						int noteId = currEntry.getNoteId();
-			
 						/*if (i % 4000 ==0) {
 							System.out.println(i + ": " + noteId);
 						}
