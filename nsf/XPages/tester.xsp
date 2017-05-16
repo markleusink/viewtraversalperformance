@@ -45,6 +45,7 @@
 
 	<xp:div
 		id="content"
+		style="margin-bottom: 30px"
 		styleClass="container-fluid">
 
 		<xp:button
@@ -157,13 +158,11 @@
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
+
 		</xp:div>
 
 		<hr />
-		<div
-			class="alert alert-warning">
-			Tests that only get the note ID: these cannot be compared to the tests above...
-		</div>
+		
 		<xp:div
 			styleClass="row">
 			<xp:panel
@@ -175,7 +174,8 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
-					label="JNA (method 1)"
+					label="JNA (NoteId's only - method 1)"
+					description="cannot be compared with the other tests"
 					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNANoteIdsOnly.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
@@ -190,11 +190,32 @@
 					</xe:objectData>
 				</xp:this.data>
 				<xc:ccPerfTest
-					label="JNA (method 2)"
+					label="JNA (NoteId's only - method )"
+					description="cannot be compared with the other tests"
 					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/JNANoteIdsOnlyFaster.java"
 					ctrl="#{objectData1}">
 				</xc:ccPerfTest>
 			</xp:panel>
+			
+			<xp:panel
+				styleClass="col-sm-2">
+			</xp:panel>
+			
+			<xp:panel
+				styleClass="col-sm-2">
+				<xp:this.data>
+					<xe:objectData
+						var="objectData1"
+						createObject="#{javascript:return new eu.focos.performance.ODAColIndexFaster();}">
+					</xe:objectData>
+				</xp:this.data>
+				<xc:ccPerfTest
+					label="ODA (col value by index - manual loop"
+					source="https://github.com/markleusink/viewtraversalperformance/blob/master/nsf/Code/Java/eu/focos/performance/ODAColIndexFaster.java"
+					ctrl="#{objectData1}">
+				</xc:ccPerfTest>
+			</xp:panel>
+			
 
 		</xp:div>
 

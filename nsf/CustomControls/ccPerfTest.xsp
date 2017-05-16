@@ -10,19 +10,30 @@
 			categoryFilter="#{javascript:compositeData.label}">
 		</xp:dominoView>
 	</xp:this.data>
+
 	<div
-		style="height: 50px; margin-top: 10px; font-weight: bold; font-size: 14px;">
+		style="height: 70px; margin-top: 10px;">
 		<xp:link
 			escape="true"
+			style="font-weight: bold; font-size: 14px;"
 			value="#{compositeData.source}"
 			target="blank"
 			text="#{compositeData.label}"
 			id="computedField1">
 		</xp:link>
+
+		<xp:text
+			escape="true"
+			styleClass="small text-muted"
+			tagName="div"
+			value="#{compositeData.description}"
+			id="computedField3">
+		</xp:text>
 	</div>
 
 	<xp:button
-		value="Start"
+		value="Start test"
+		styleClass="btn-sm"
 		id="button1"
 		onclick="$(this).button('loading'); $('button').attr('disabled', true)">
 		<xp:this.attrs>
